@@ -1,0 +1,3 @@
+[submodule "Externals/DoseReactApp"]
+	path = Externals/DoseReactApp
+	url = git@github.com:DoseLibrary/DoseReactApp.git
