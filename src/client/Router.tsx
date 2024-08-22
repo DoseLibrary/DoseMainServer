@@ -3,6 +3,8 @@ import { Root } from './routes/root'
 import ErrorPage from "./ErrorPage";
 import { LoginView } from "./routes/auth/LoginView";
 import { RegisterView } from "./routes/auth/RegisterView";
+import { DashboardView } from "./routes/dashboard/DashboardView";
+import { ServerSelectorView } from "./routes/server-selector/ServerSelectorView";
 
 const router = createBrowserRouter([
   {
@@ -20,7 +22,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/server-selector",
-        element: <div>Server Selector</div>
+        element: <ServerSelectorView />
+      },
+      {
+        path: "/dashboard",
+        element: <DashboardView />
       }
     ]
   },

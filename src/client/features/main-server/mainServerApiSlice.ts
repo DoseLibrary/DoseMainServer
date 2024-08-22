@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../../app/store";
+import { ListContentServerResponse } from "@shared/types/response";
 
 export const mainServerApiSlice = createApi({
   baseQuery: fetchBaseQuery({
@@ -16,9 +17,10 @@ export const mainServerApiSlice = createApi({
   reducerPath: 'mainServerApi',
   tagTypes: ['ContentServers'],
   endpoints: build => ({
-    getContentServers: build.query({
-      query: () => '/content-servers',
-      providesTags: (result, error, id) => [{ type: 'ContentServers', id }]
+    getContentServers: build.query<ListContentServerResponse[], void>({
+      query: () => '/content-servers/list',
     })
   }),
 });
+
+export const { useGetContentServersQuery } = mainServerApiSlice;

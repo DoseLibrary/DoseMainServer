@@ -30,3 +30,7 @@ export const signJwt = (payload: object, expiresIn: string): string => {
 export const signUserJwt = (payload: JwtPayload): string => {
   return signJwt(payload, '1h');
 }
+
+export const verifyJwt = (token: string): JwtPayload => {
+  return jwt.verify(token, getSecret()) as JwtPayload;
+}

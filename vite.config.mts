@@ -17,7 +17,6 @@ export default defineConfig({
   root: "src/client",
   resolve: {
     alias: {
-      "@": "/src/client",
       "@assets": "/src/client/assets",
       "@shared": "/src/shared",
     }

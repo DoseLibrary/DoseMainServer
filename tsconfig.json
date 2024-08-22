@@ -24,7 +24,6 @@
       "vitest/globals"
     ],
     "paths": {
-      "@/*": ["./src/client/*"],
       "@assets/*": ["./src/client/assets/*"],
       "@shared/*": ["./src/shared/*"]
     }

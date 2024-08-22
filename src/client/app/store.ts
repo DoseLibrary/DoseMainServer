@@ -7,10 +7,19 @@ import { authSlice } from "../features/auth/authSlice"
 import { toastSlice } from "../features/toast/toastSlice"
 import storage from "redux-persist/lib/storage"
 import { persistReducer, persistStore } from "redux-persist"
+import { sessionSlice } from "../features/session/sessionSlice"
+import { mainServerApiSlice } from "../features/main-server/mainServerApiSlice"
 
 // `combineSlices` automatically combines the reducers using
 // their `reducerPath`s, therefore we no longer need to call `combineReducers`.
-const rootReducer = combineSlices(counterSlice, quotesApiSlice, authSlice, toastSlice)
+const rootReducer = combineSlices(
+  counterSlice,
+  quotesApiSlice,
+  authSlice,
+  toastSlice,
+  sessionSlice,
+  mainServerApiSlice,
+)
 // Infer the `RootState` type from the root reducer
 export type RootState = ReturnType<typeof rootReducer>;
 
@@ -30,7 +39,12 @@ export const makeStore = (preloadedState?: Partial<RootState>) => {
     // Adding the api middleware enables caching, invalidation, polling,
     // and other useful features of `rtk-query`.
     middleware: getDefaultMiddleware => {
-      return getDefaultMiddleware().concat(quotesApiSlice.middleware)
+      return getDefaultMiddleware().concat(
+        ...[
+          quotesApiSlice.middleware,
+          mainServerApiSlice.middleware,
+        ]
+      )
     },
   })
   // configure listeners using the provided defaults

@@ -4,6 +4,7 @@ import cors from 'cors';
 import { RouterPath } from './types/RouterPath';
 import { createAuthEndpoints } from './endpoints/auth';
 import HttpException from './exceptions/HttpException';
+import { createContentServerEndpoints } from './endpoints/servers';
 
 export class Server {
   private app: Express;
@@ -16,6 +17,7 @@ export class Server {
   private initializeApiEndpoints() {
     const endpoints: RouterPath[] = [
       createAuthEndpoints(),
+      createContentServerEndpoints(),
     ];
     const apiRouter = Router();
     endpoints.forEach(({ router, path }) => apiRouter.use(path, router));
