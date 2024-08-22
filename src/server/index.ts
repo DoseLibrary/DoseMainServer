@@ -3,6 +3,7 @@ import { Server } from './Server';
 
 export const app = express();
 
+console.log('hello');
 const server = new Server(app);
 server.start();
 
