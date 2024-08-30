@@ -7,8 +7,7 @@ import { authSlice } from "../features/auth/authSlice"
 import { toastSlice } from "../features/toast/toastSlice"
 import storage from "redux-persist/lib/storage"
 import { persistReducer, persistStore } from "redux-persist"
-import { sessionSlice } from "../features/session/sessionSlice"
-import { mainServerApiSlice } from "../features/main-server/mainServerApiSlice"
+import { serverApiSlice } from "../features/server/serverApiSlice"
 
 // `combineSlices` automatically combines the reducers using
 // their `reducerPath`s, therefore we no longer need to call `combineReducers`.
@@ -17,8 +16,7 @@ const rootReducer = combineSlices(
   quotesApiSlice,
   authSlice,
   toastSlice,
-  sessionSlice,
-  mainServerApiSlice,
+  serverApiSlice,
 )
 // Infer the `RootState` type from the root reducer
 export type RootState = ReturnType<typeof rootReducer>;
@@ -42,7 +40,7 @@ export const makeStore = (preloadedState?: Partial<RootState>) => {
       return getDefaultMiddleware().concat(
         ...[
           quotesApiSlice.middleware,
-          mainServerApiSlice.middleware,
+          serverApiSlice.middleware,
         ]
       )
     },

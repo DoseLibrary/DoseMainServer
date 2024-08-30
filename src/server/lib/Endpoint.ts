@@ -150,9 +150,10 @@ abstract class Endpoint {
         break;
       case ResponseType.STREAM:
         const passThrough = new stream.PassThrough();
-        if (!isStream.readable(data)) {
+        if (!isStream.isReadableStream(data)) {
           throw new Error('Expected data to be a readable stream');
         }
+        console.log('Sending stream');
         stream.pipeline(
           data,
           passThrough,

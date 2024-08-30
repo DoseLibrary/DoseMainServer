@@ -32,7 +32,7 @@ export const normalizeDetailedMovie = (movie: Movie): DetailedMovieResponse => {
       orderInCredit: character.orderInCredit,
       actor: {
         name: character.actor.name,
-        imageId: character.actor.images[0]?.id, // Frontend only supports one image right now
+        imageId: (character.actor.images || [])[0]?.id, // Frontend only supports one image right now
         id: character.actor.id
       }
     })) || [],

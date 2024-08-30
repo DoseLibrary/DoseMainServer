@@ -33,10 +33,11 @@ export class GetRandomMovieEndpoint extends GetEndpoint {
   private getRandomMovie(requireTrailer: boolean) {
     const queryBuilder = MovieRepository.createQueryBuilder('movie')
       .orderBy('RANDOM()')
-      .limit(1)
       .leftJoinAndSelect('movie.metadata', 'metadata')
       .leftJoinAndSelect('metadata.genres', 'genres')
-      .leftJoinAndSelect('metadata.images', 'images')
+      .leftJoin('metadata.images', 'images').addSelect(['images.id', 'images.type'])
+      .leftJoinAndSelect('metadata.characters', 'characters')
+      .leftJoinAndSelect('characters.actor', 'actor')
     if (requireTrailer) {
       queryBuilder.where('trailerPath IS NOT NULL')
     }

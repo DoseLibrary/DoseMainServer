@@ -31,6 +31,7 @@ export class GetMovieTrailerEndpoint extends GetEndpoint {
     if (movie.trailerPath === null) {
       throw new NotFoundException('No trailer for movie');
     }
+    console.log(movie.trailerPath);
     return fs.createReadStream(movie.trailerPath);
   }
 

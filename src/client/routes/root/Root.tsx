@@ -3,11 +3,9 @@ import { ToastRenderer } from "../../features/toast/ToastRenderer";
 import { useAppSelector } from "../../app/hooks";
 import { selectIsLoggedIn } from "../../features/auth/authSlice";
 import { useEffect } from "react";
-import { selectHasContentServer } from "../../features/session/sessionSlice";
 
 const Root = () => {
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
-  const hasContentServer = useAppSelector(selectHasContentServer);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -15,10 +13,8 @@ const Root = () => {
   useEffect(() => {
     if (!isLoggedIn && location.pathname !== '/login' && location.pathname !== '/register') {
       navigate('/login');
-    } else if (isLoggedIn) {
-      if (!hasContentServer && location.pathname !== '/server-selector') {
-        navigate('/server-selector');
-      }
+    } else if (location.pathname === '/') {
+      navigate('/dashboard');
     }
   });
 
@@ -28,8 +24,8 @@ const Root = () => {
       bg-gray-100
       dark:bg-black
       text-white
-      h-screen
-      w-screen
+      h-full
+      w-full
     `}>
         <Outlet />
         <ToastRenderer />

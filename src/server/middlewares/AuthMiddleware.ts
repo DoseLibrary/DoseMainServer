@@ -1,6 +1,6 @@
 import { NextFunction, Response, Request } from "express";
 import { NotAuthorizedException } from "../exceptions/NotAuthorizedException";
-import { decodeJwt } from "../util/security";
+import { Security } from "../lib/security";
 
 const getToken = (req: Request) => {
   if (req.query.token !== undefined) {
@@ -21,7 +21,7 @@ const getToken = (req: Request) => {
 export const isAuthorized = (req: Request, res: Response, next: NextFunction) => {
   try {
     const token = getToken(req);
-    const decoded = decodeJwt(token);
+    const decoded = Security.verifyJwt(token);
     res.locals.userId = decoded.userId;
     return next();
   } catch (error) {

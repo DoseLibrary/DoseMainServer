@@ -1,5 +1,4 @@
 import { EventEmitter } from 'events';
-import { ValidateEndpoint } from './validate/Validate'
 import express from 'express';
 import { Config } from '../../lib/Config';
 import { RouterPath } from '../../types/RouterPath';
@@ -8,7 +7,6 @@ import { LoginEndpoint } from './Login';
 
 export const createAuthEndpoints = (config: Config, emitter: EventEmitter): RouterPath => {
   const endpoints = [
-    new ValidateEndpoint(emitter),
     new RegisterEndpoint(emitter),
     new LoginEndpoint(emitter),
   ];

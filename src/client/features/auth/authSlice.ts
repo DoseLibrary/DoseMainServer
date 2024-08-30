@@ -98,6 +98,7 @@ export const authSlice = createAppSlice({
         fulfilled: (state, action) => {
           state.loading = false;
           state.success = true;
+          console.log(action.payload);
           state.userToken = action.payload.accessToken;
           state.refreshToken = action.payload.refreshToken;
         },

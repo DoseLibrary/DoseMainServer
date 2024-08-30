@@ -31,6 +31,7 @@ import { ShowRepository } from "./repositories/ShowRepository";
 import { SeasonRepository } from "./repositories/SeasonRepository";
 import { EpisodeRepository } from "./repositories/EpisodeRepository";
 import { LibraryRepository } from "./repositories/LibraryRepository";
+import { ScanForTrailerJob } from "./lib/job/ScanForTrailersJob";
 
 export class Server {
   private app: Express;
@@ -108,14 +109,12 @@ export class Server {
   }
 
   private setupJobs() {
-    /*
     this.jobs.push(
-      new PopularMovieJob(this.repository),
-      new ScanForTrailerJob(this.repository),
-      new ExtractSubtitlesJob(this.repository, this.emitter)
+      new ScanForTrailerJob(),
+      // new PopularMovieJob(this.repository),
+      // new ExtractSubtitlesJob(this.repository, this.emitter)
     );
     this.jobs.map(job => job.start());
-    */
   }
 
   private async syncDatabase() {

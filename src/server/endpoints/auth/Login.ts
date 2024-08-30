@@ -4,8 +4,8 @@ import { body, ValidationChain } from "express-validator";
 import { LoginRequest } from "@shared/types/request";
 import { RequestData } from "../../types/RequestData";
 import { UserRepository } from "../../repositories/UserRepository";
-import { Security } from "../../lib/security";
 import { NotAuthorizedException } from "../../exceptions/NotAuthorizedException";
+import { Security } from "../../lib/security";
 
 export class LoginEndpoint extends PostEndpoint {
   constructor(emitter: EventEmitter) {
@@ -31,7 +31,7 @@ export class LoginEndpoint extends PostEndpoint {
       throw new NotAuthorizedException();
     }
     return {
-      token: Security.signUserJwt({ username: user.username, userId: user.id }),
+      accessToken: Security.signUserJwt({ username: user.username, userId: user.id }),
       refreshToken: Security.signJwt({ username: user.username, userId: user.id }, '7d'),
     };
   }

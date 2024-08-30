@@ -3,8 +3,8 @@ import { Root } from './routes/root'
 import ErrorPage from "./ErrorPage";
 import { LoginView } from "./routes/auth/LoginView";
 import { RegisterView } from "./routes/auth/RegisterView";
+import { MainView } from "./routes/main/MainView";
 import { DashboardView } from "./routes/dashboard/DashboardView";
-import { ServerSelectorView } from "./routes/server-selector/ServerSelectorView";
 
 const router = createBrowserRouter([
   {
@@ -21,12 +21,14 @@ const router = createBrowserRouter([
         element: <RegisterView />
       },
       {
-        path: "/server-selector",
-        element: <ServerSelectorView />
-      },
-      {
-        path: "/dashboard",
-        element: <DashboardView />
+        path: "/",
+        element: <MainView />,
+        children: [
+          {
+            path: '/dashboard',
+            element: <DashboardView />
+          }
+        ]
       }
     ]
   },

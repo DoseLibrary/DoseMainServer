@@ -16,6 +16,16 @@ export const MovieRepository = AppDataSource.getRepository(Movie).extend({
     }
     return path.join(movie.library.path, movie.path);
   },
+  async findByLibraryId(libraryId: number, options?: FindManyOptions<Movie>) {
+    return this.find({
+      where: {
+        library: {
+          id: libraryId
+        }
+      },
+      ...options
+    });
+  },
   async findByTitle(title: string, options?: FindManyOptions<Movie>) {
     return this.find({
       where: [
